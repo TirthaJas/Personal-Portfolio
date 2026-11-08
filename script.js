@@ -10,7 +10,7 @@ const projects = [
     title: "JEE Tracker",
     description: "Track you daily JEE classes and manage your time effectively.",
     tags: ["HTML", "CSS", "JavaScript"],
-    image: "jee.png",
+    image: "images/jee.png",
     live: "https://jee-tirtha.netlify.app/",
     code: "https://github.com/yourname/project-one"
   },
@@ -18,7 +18,7 @@ const projects = [
     title: "NEET Tracker",
     description: "Track you daily NEET classes and clear your backlogs with daily aims and records.",
     tags: ["HTML", "CSS", "JavaScript"],
-    image: "neet.png",
+    image: "images/neet.png",
     live: "https://neet-torsha.netlify.app/",
     code: "https://github.com/yourname/project-two"
   },
