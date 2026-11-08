@@ -7,19 +7,19 @@
    ========================================================= */
 const projects = [
   {
-    title: "Project One",
-    description: "One or two sentences about what it does and who it is for.",
-    tags: ["Python", "Flask"],
-    image: "",
-    live: "https://example.com",
+    title: "JEE Tracker",
+    description: "Track you daily JEE classes and manage your time effectively.",
+    tags: ["HTML", "CSS", "JavaScript"],
+    image: "jee.png",
+    live: "https://jee-tirtha.netlify.app/",
     code: "https://github.com/yourname/project-one"
   },
   {
-    title: "Project Two",
-    description: "Another short, clear description. Mention the problem it solves.",
+    title: "NEET Tracker",
+    description: "Track you daily NEET classes and clear your backlogs with daily aims and records.",
     tags: ["HTML", "CSS", "JavaScript"],
-    image: "",
-    live: "",
+    image: "neet.png",
+    live: "https://neet-torsha.netlify.app/",
     code: "https://github.com/yourname/project-two"
   },
   {
@@ -35,7 +35,7 @@ const projects = [
 /* =========================================================
    2) ROTATING ROLES under your name. Change the words freely.
    ========================================================= */
-const roles = ["developer", "problem solver", "Linux enthusiast", "lifelong learner"];
+const roles = ["developer", "problem solver", "enthusiast", "lifelong learner"];
 
 /* ---------- Everything below runs the site. You can leave it alone. ---------- */
 
