@@ -35,7 +35,7 @@ const projects = [
 /* =========================================================
    2) ROTATING ROLES under your name. Change the words freely.
    ========================================================= */
-const roles = ["developer", "problem solver", "enthusiast", "lifelong learner"];
+const roles = ["developer", "problem solver", "growing enthusiast", "lifelong learner"];
 
 /* ---------- Everything below runs the site. You can leave it alone. ---------- */
 
