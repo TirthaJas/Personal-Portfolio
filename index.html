@@ -3,19 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- EDIT: page title and description (shows in Google and link previews) -->
-  <title>Tirtha Jas – Developer & Creator</title>
-  <meta name="description" content="Portfolio of Tirtha Jas: projects, skills, achievements and contact.">
+  <!-- ✏️ EDIT: page title and description (shown in Google and link previews) -->
+  <title>Tirtha Jas – Developer, Student &amp; Creator</title>
+  <meta name="description" content="Tirtha Jas, student developer and founder of Solusvir.co. Explore projects, achievements and skills, or get in touch.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Tirtha Jas">
+
+  <!-- 🔁 LATER: when your is-a.dev domain is approved, replace every
+       https://tirthajas.github.io/Personal-Portfolio/
+       in this file (Ctrl+H in VS Code) with  https://solusvir.is-a.dev/ -->
+  <link rel="canonical" href="https://tirthajas.github.io/Personal-Portfolio/">
+
+  <!-- Link preview: WhatsApp, Telegram, Facebook, LinkedIn, Discord, iMessage -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tirtha Jas">
+  <meta property="og:title" content="Tirtha Jas – Developer, Student & Founder of Solusvir.co">
+  <meta property="og:description" content="Student developer and founder of Solusvir.co. Explore projects, achievements and skills.">
+  <meta property="og:url" content="https://tirthajas.github.io/Personal-Portfolio/">
+  <meta property="og:image" content="https://tirthajas.github.io/Personal-Portfolio/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tirtha Jas, developer, student and founder of Solusvir.co, beside a golden emblem">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tirtha Jas – Developer, Student & Founder of Solusvir.co">
+  <meta name="twitter:description" content="Student developer and founder of Solusvir.co. Explore projects, achievements and skills.">
+  <meta name="twitter:image" content="https://tirthajas.github.io/Personal-Portfolio/og-image.jpg">
+
+  <!-- Helps Google understand who you are.
+       ✏️ EDIT: add your other real profile links (YouTube, Instagram...) inside "sameAs" -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "WebSite", "@id": "https://tirthajas.github.io/Personal-Portfolio/#website", "url": "https://tirthajas.github.io/Personal-Portfolio/", "name": "Tirtha Jas", "alternateName": ["Tirtha Jas Portfolio", "Solusvir.co"], "inLanguage": "en" },
+      { "@type": "Person", "@id": "https://tirthajas.github.io/Personal-Portfolio/#person", "name": "Tirtha Jas", "alternateName": ["TirthaJas"], "url": "https://tirthajas.github.io/Personal-Portfolio/",
+        "image": "https://tirthajas.github.io/Personal-Portfolio/og-image.jpg", "jobTitle": "Developer and Founder", "description": "Student developer and founder of Solusvir.co.",
+        "worksFor": { "@type": "Organization", "name": "Solusvir.co", "url": "https://tirthajas.github.io/Personal-Portfolio/" },
+        "knowsAbout": ["Web development", "Python", "JavaScript", "Java", "HTML", "CSS"],
+        "sameAs": ["https://github.com/TirthaJas"] }
+    ]
+  }
+  </script>
   <meta name="theme-color" content="#0a0e1a">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- Lets the CSS know JavaScript is running (so animations never hide content by mistake). Keep this line. -->
+  <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="spot" aria-hidden="true"></div>
 
 <header class="nav">
   <a class="brand" href="#top" aria-label="SOLUSVIR.CO, back to top">
@@ -34,13 +79,15 @@
 
 <main id="main">
 
-  <!-- HERO -->
+  <!-- ================= HERO ================= -->
   <section class="hero" id="top">
     <div class="hero-text">
       <p class="status"><span class="dot"></span>Open to new projects</p>
-      <h1>Tirtha Jas</h1>
+      <!-- ✏️ EDIT: your name (the script animates it letter by letter) -->
+      <h1 id="name">Tirtha Jas</h1>
       <p class="roles">I am a <span id="role">developer</span><span class="caret"></span></p>
-      <p class="lead">Hi, I'm Tirtha Jas, founder of Solusvir.co - changing visions of life and building dreams...</p>
+      <!-- ✏️ EDIT: your one-line tagline -->
+      <p class="lead">Founder of Solusvir.co, reimagining everyday life and building dreams, one line of code at a time.</p>
       <div class="cta">
         <a class="btn primary" href="#projects">See my work</a>
         <a class="btn" href="#contact">Get in touch</a>
@@ -49,90 +96,99 @@
 
     <!-- The orbital emblem: your logo sits in the centre -->
     <div class="emblem" aria-hidden="true">
+      <div class="brk"></div>
       <svg viewBox="0 0 400 400" class="ring r1"><circle cx="200" cy="200" r="190" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 8"/><circle cx="200" cy="10" r="5" fill="currentColor"/></svg>
       <svg viewBox="0 0 400 400" class="ring r2"><circle cx="200" cy="200" r="160" fill="none" stroke="currentColor" stroke-width="1"/><g id="ticks"></g></svg>
-      <svg viewBox="0 0 400 400" class="ring r3"><circle cx="200" cy="200" r="128" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="60 20 6 20"/></svg>
+      <svg viewBox="0 0 400 400" class="ring r3"><circle cx="200" cy="200" r="128" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="60 20 6 20"/><circle cx="200" cy="72" r="4.5" class="orb"/></svg>
       <div class="core"><span class="logo-mark"></span></div>
+      <span class="cap">// Founder, Solusvir.co</span>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ================= ABOUT ================= -->
   <section id="about" class="section">
-    <h2>About me</h2>
+    <h2 class="reveal">About me</h2>
     <div class="about">
-      <div class="prose">
-        <p>I am a student, who loves coding and exploring new things.</p>
-        <p>Currently I am in class 11, and I am preparing for JEE Mains and JEE Advanced for seeking into the top IITs.<br> I believe, a computer and a student's mind can change the whole world !</p>
+      <div class="prose reveal">
+        <!-- ✏️ EDIT: your story -->
+        <p>I am a student with a deep love for coding and a restless curiosity for new things.</p>
+        <p>Currently in class 11, I am preparing for JEE Main and JEE Advanced, with the dream of studying at one of India’s top IITs.</p>
+        <div class="pull">
+          <div class="seal" aria-hidden="true">
+            <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text><textPath href="#circ" textLength="508" lengthAdjust="spacing">TIRTHA JAS ◆ SOLUSVIR.CO ◆ STUDENT ◆ FOUNDER ◆ </textPath></text></svg>
+            <span class="logo-mark"></span>
+          </div>
+          <blockquote>I believe a computer and a curious student’s mind can change the whole world.</blockquote>
+        </div>
       </div>
-      <dl class="facts">
+      <dl class="facts reveal">
         <div><dt>Based in</dt><dd>India</dd></div>
-        <div><dt>Focus</dt><dd>HTML, Css, Java, JavaScript, Windows, Python, Git</dd></div>
-        <div><dt>Learning</dt><dd>50 Shades of Coding</dd></div>
+        <div><dt>Focus</dt><dd>HTML, CSS, JavaScript, Java, Python, Git, Windows</dd></div>
+        <div><dt>Learning</dt><dd>Every shade of coding</dd></div>
         <div><dt>Languages</dt><dd>English, Bengali, Hindi</dd></div>
       </dl>
     </div>
   </section>
 
-  <!-- ACHIEVEMENTS: a real sequence, so it is a timeline -->
+  <!-- ================= ACHIEVEMENTS ================= -->
   <section id="achievements" class="section">
-    <h2>Achievements</h2>
+    <h2 class="reveal">Achievements</h2>
     <ol class="timeline">
-      <li><time>2026</time><div><h3>Top Scorer in ICSE 2026 in School</h3><p class="by">Issued by My School and CISCE</p><p>Being top scorer in ICSE was the most delightful thing that has happened till now.</p></div></li>
-      <li><time>2023-25</time><div><h3>Maintained the 1st position in Science Exhibition for 3 consecutive years</h3><p class="by">Issued by my School</p><p>Building tech-things was my hobby, and mechanics fascinated me.</p></div></li>
-      <li><time>2024</time><div><h3>Achievement title</h3><p class="by">Issued by Organisation</p><p>One line on what you did and why it mattered.</p></div></li>
+      <li class="reveal"><time>2026</time><div><h3>School Topper, ICSE 2026</h3><p class="by">My School · CISCE</p><p>Finishing at the top of my school in the ICSE examinations remains the most delightful moment of my journey so far.</p></div></li>
+      <li class="reveal"><time>2023–25</time><div><h3>First Position, Science Exhibition, three years running</h3><p class="by">My School</p><p>Building things with my own hands has always been my favourite pastime, and mechanics has fascinated me from the start.</p></div></li>
+      <!-- ✏️ EDIT: replace this third one with a real achievement, or delete the whole <li> line -->
+      <li class="reveal"><time>2024</time><div><h3>Achievement title</h3><p class="by">Issued by Organisation</p><p>One line on what you did and why it mattered.</p></div></li>
     </ol>
   </section>
 
-  <!-- PROJECTS: cards are generated from the list in script.js -->
+  <!-- ================= PROJECTS (cards come from script.js) ================= -->
   <section id="projects" class="section">
-    <h2>Projects</h2>
-    <p class="sub">Things I have built. Open any card to see it live or read the code.</p>
+    <h2 class="reveal">Projects</h2>
+    <p class="sub reveal">A selection of things I have built. Open any card to see it live or explore the code.</p>
     <div class="grid" id="projectGrid"></div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ================= SKILLS ================= -->
   <section id="skills" class="section">
-    <h2>Skills</h2>
+    <h2 class="reveal">Skills</h2>
+    <!-- ✏️ EDIT: the scrolling strip. Add or remove <span> items freely -->
+    <div class="marquee reveal" aria-label="Technologies I use">
+      <div class="track"><span>Python</span><span>JavaScript</span><span>Java</span><span>HTML</span><span>CSS</span><span>Git</span><span>GitHub</span><span>Windows</span></div>
+    </div>
     <div class="skills">
-      <div class="skill-group">
+      <div class="skill-group reveal">
         <h3>Languages</h3>
-        <ul>
-          <li><span>Python</span><i style="--lvl:90%"></i></li>
-          <li><span>JavaScript</span><i style="--lvl:70%"></i></li>
-          <li><span>Java</span><i style="--lvl:65%"></i></li>
-          <li><span>HTML &amp; CSS</span><i style="--lvl:85%"></i></li>
-        </ul>
+        <p class="chips"><b>Python</b><b>JavaScript</b><b>Java</b><b>HTML &amp; CSS</b></p>
       </div>
-      <div class="skill-group">
-        <h3>Systems</h3>
-        <ul>
-          <li><span>Linux</span><i style="--lvl:80%"></i></li>
-          <li><span>Git &amp; GitHub</span><i style="--lvl:75%"></i></li>
-          <li><span>Bash</span><i style="--lvl:60%"></i></li>
-        </ul>
+      <!-- ✏️ EDIT: Linux and Bash were examples from the template. Add them back only if they are true for you -->
+      <div class="skill-group reveal">
+        <h3>Tools &amp; systems</h3>
+        <p class="chips"><b>Git &amp; GitHub</b><b>Windows</b></p>
       </div>
-      <div class="skill-group">
-        <h3>Also comfortable with</h3>
+      <div class="skill-group reveal">
+        <h3>Strengths</h3>
         <p class="chips"><b>Problem solving</b><b>Debugging</b><b>Teamwork</b><b>Quick learning</b></p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ================= CONTACT ================= -->
   <section id="contact" class="section">
-    <h2>Contact &amp; socials</h2>
+    <h2 class="reveal">Contact &amp; socials</h2>
+    <p class="sub reveal">Have an idea, a question or simply want to say hello? Write to me. I read every message.</p>
     <div class="contact">
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <!-- ✏️ EDIT (important): replace YOUR_FORM_ID with your form service ID (Formspree / Web3Forms) -->
+      <form class="reveal" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <label>Name<input name="name" type="text" autocomplete="name" required></label>
         <label>Email<input name="email" type="email" autocomplete="email" required></label>
         <label>Message<textarea name="message" rows="5" required></textarea></label>
         <button class="btn primary" type="submit">Send message</button>
       </form>
-      <div class="socials">
-        <p>Prefer a direct line? Reach me here.</p>
-        <!-- EDIT: replace every # with your own link -->
+      <div class="socials reveal">
+        <p>Prefer a direct line? Find me here.</p>
+        <!-- ✏️ EDIT (important): replace every link below with your own -->
         <a href="mailto:you@example.com">Email</a>
-        <a href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/TirthaJas" target="_blank" rel="noopener">GitHub</a>
         <a href="https://discord.com/users/yourid" target="_blank" rel="noopener">Discord</a>
         <a href="https://youtube.com/@yourname" target="_blank" rel="noopener">YouTube</a>
       </div>
@@ -141,7 +197,11 @@
 </main>
 
 <footer class="foot">
-  <p>© <span id="year">2026</span> Tirtha Jas. All rights reserved.</p>
+  <nav aria-label="Legal">
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </nav>
+  <p>© <span id="year">2026</span> Tirtha Jas · Solusvir.co. All rights reserved.</p>
 </footer>
 
 <script src="script.js"></script>

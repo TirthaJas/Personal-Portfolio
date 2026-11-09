@@ -4,24 +4,28 @@
    image: put the screenshot in the "images" folder, e.g. "images/mysite.png"
           (leave it as "" to show a plain placeholder)
    live / code: links; leave as "" to hide that link
+   featured: true shows a small "Featured" badge (optional)
    ========================================================= */
 const projects = [
   {
     title: "JEE Tracker",
-    description: "Track you daily JEE classes and manage your time effectively.",
+    description: "A daily companion for JEE aspirants: log your classes, plan your study hours and manage your time with clarity.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: "images/jee.png",
     live: "https://jee-tirtha.netlify.app/",
-    code: "https://github.com/yourname/project-one"
+    code: "https://github.com/yourname/project-one", // ✏️ EDIT: put your real GitHub link here
+    featured: true
   },
   {
     title: "NEET Tracker",
-    description: "Track you daily NEET classes and clear your backlogs with daily aims and records.",
+    description: "Track your daily NEET classes, clear your backlogs and stay on course with daily aims and progress records.",
     tags: ["HTML", "CSS", "JavaScript"],
     image: "images/neet.png",
     live: "https://neet-torsha.netlify.app/",
-    code: "https://github.com/yourname/project-two"
+    code: "https://github.com/yourname/project-two", // ✏️ EDIT: put your real GitHub link here
+    featured: true
   },
+  // ✏️ EDIT: fill this in with your next project, or delete the whole { ... } block
   {
     title: "Project Three",
     description: "Say what you learned or what is special about this one.",
@@ -39,11 +43,14 @@ const roles = ["developer", "problem solver", "growing enthusiast", "lifelong le
 
 /* ---------- Everything below runs the site. You can leave it alone. ---------- */
 
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 // Build project cards
 const grid = document.getElementById("projectGrid");
 projects.forEach(p => {
   const card = document.createElement("article");
-  card.className = "card";
+  card.className = "card reveal";
   const shot = p.image
     ? `<img src="${p.image}" alt="Screenshot of ${p.title}" loading="lazy">`
     : `<span>${p.title}</span>`;
@@ -52,6 +59,7 @@ projects.forEach(p => {
     p.code ? `<a href="${p.code}" target="_blank" rel="noopener">Source code</a>` : ""
   ].join("");
   card.innerHTML = `
+    ${p.featured ? '<span class="badge">Featured</span>' : ""}
     <div class="shot">${shot}</div>
     <div class="body">
       <h3>${p.title}</h3>
@@ -61,6 +69,14 @@ projects.forEach(p => {
     </div>`;
   grid.appendChild(card);
 });
+// If a screenshot is missing, show a tidy placeholder instead of a broken image
+grid.querySelectorAll(".shot img").forEach(img =>
+  img.addEventListener("error", () => {
+    const s = document.createElement("span");
+    s.textContent = img.alt.replace("Screenshot of ", "");
+    img.replaceWith(s);
+  })
+);
 
 // Tick marks on the middle emblem ring
 const ticks = document.getElementById("ticks");
@@ -73,9 +89,31 @@ for (let i = 0; i < 72; i++) {
 }
 ticks.innerHTML = t;
 
+// Name slides in letter by letter
+const nameEl = document.getElementById("name");
+if (nameEl && !reduce) {
+  const full = nameEl.textContent.trim();
+  nameEl.setAttribute("aria-label", full);
+  nameEl.textContent = "";
+  let n = 0;
+  full.split(" ").forEach((word, wi, all) => {
+    const w = document.createElement("span");
+    w.className = "w";
+    w.setAttribute("aria-hidden", "true");
+    [...word].forEach(ch => {
+      const s = document.createElement("span");
+      s.className = "ch";
+      s.textContent = ch;
+      s.style.setProperty("--i", n++);
+      w.appendChild(s);
+    });
+    nameEl.appendChild(w);
+    if (wi < all.length - 1) nameEl.appendChild(document.createTextNode(" "));
+  });
+}
+
 // Typing effect for roles
 const roleEl = document.getElementById("role");
-const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let ri = 0, ci = 0, deleting = false;
 function type() {
   const word = roles[ri];
@@ -86,6 +124,90 @@ function type() {
   setTimeout(type, deleting ? 40 : 85);
 }
 if (reduce) roleEl.textContent = roles[0]; else type();
+
+// Skills strip: repeat the items so the scroll loops with no gap
+const track = document.querySelector(".track");
+if (track && !reduce) track.innerHTML += track.innerHTML;
+
+// Scroll reveal with a gentle stagger
+document.querySelectorAll(".reveal").forEach(el => {
+  const siblings = [...el.parentElement.children].filter(c => c.classList.contains("reveal"));
+  el.style.setProperty("--i", siblings.indexOf(el));
+});
+const revealer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    el.classList.add("in");
+    revealer.unobserve(el);
+    const done = ev => {
+      if (ev.target !== el) return;
+      el.classList.add("done");
+      el.removeEventListener("transitionend", done);
+    };
+    el.addEventListener("transitionend", done);
+  });
+}, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+document.querySelectorAll(".reveal").forEach(el => revealer.observe(el));
+
+// Highlight the current section in the menu
+const navLinks = [...document.querySelectorAll(".links a")];
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+    }
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("main section[id]").forEach(s => spy.observe(s));
+
+// Scroll progress line + cursor spotlight
+const bar = document.querySelector(".progress");
+let ticking = false;
+function onScroll() {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    ticking = false;
+  });
+}
+addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+if (fine && !reduce) {
+  const root = document.documentElement;
+  let raf = 0;
+  addEventListener("pointermove", e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      root.style.setProperty("--mx", e.clientX + "px");
+      root.style.setProperty("--my", e.clientY + "px");
+    });
+  }, { passive: true });
+
+  // Project cards tilt and glow toward the cursor
+  document.querySelectorAll(".card").forEach(c => {
+    c.addEventListener("pointermove", e => {
+      const r = c.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--gx", x * 100 + "%");
+      c.style.setProperty("--gy", y * 100 + "%");
+      c.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 7}deg) rotateY(${(x - 0.5) * 9}deg) translateY(-4px)`;
+    });
+    c.addEventListener("pointerleave", () => { c.style.transform = ""; });
+  });
+
+  // Buttons lean slightly toward the cursor
+  document.querySelectorAll(".btn").forEach(b => {
+    b.addEventListener("pointermove", e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.18}px, ${(e.clientY - r.top - r.height / 2) * 0.28}px)`;
+    });
+    b.addEventListener("pointerleave", () => { b.style.transform = ""; });
+  });
+}
 
 // Mobile menu
 const btn = document.querySelector(".menu-btn");
