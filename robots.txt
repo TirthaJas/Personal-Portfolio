@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tirthajas.github.io/Personal-Portfolio/sitemap.xml
+Sitemap: https://solusvir.is-a.dev/sitemap.xml
