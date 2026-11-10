@@ -11,7 +11,7 @@ const projects = [
     title: "ISL Sign Language Translator",
     description: "A real-time AI system that reads Indian Sign Language and facial expression through a webcam, then speaks a natural English sentence aloud. Built entirely on free tools.",
     tags: ["Python", "OpenCV", "MediaPipe", "Ollama", "Streamlit"],
-    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as images/isl.png
+    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as - images/isl.png
     live: "",
     code: "",                         // ✏️ EDIT: add your GitHub link, or leave empty to hide it
     featured: true
