@@ -9,9 +9,6 @@
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Tirtha Jas">
 
-  <!-- 🔁 LATER: when your is-a.dev domain is approved, replace every
-       https://solusvir.is-a.dev/
-       in this file (Ctrl+H in VS Code) with  https://solusvir.is-a.dev/ -->
   <link rel="canonical" href="https://solusvir.is-a.dev/">
 
   <!-- Link preview: WhatsApp, Telegram, Facebook, LinkedIn, Discord, iMessage -->
@@ -41,7 +38,7 @@
       { "@type": "Person", "@id": "https://solusvir.is-a.dev/#person", "name": "Tirtha Jas", "alternateName": ["TirthaJas"], "url": "https://solusvir.is-a.dev/",
         "image": "https://solusvir.is-a.dev/og-image.jpg", "jobTitle": "Developer and Creator", "description": "Student developer and Creator.",
         "worksFor": { "@type": "Organization", "name": "Solusvir.co", "url": "https://solusvir.is-a.dev/" },
-        "knowsAbout": ["Web development", "Python", "JavaScript", "Java", "HTML", "CSS"],
+        "knowsAbout": ["Web development", "Python", "JavaScript", "Java", "HTML", "CSS", "Robotics", "Arduino", "ESP32", "Computer vision"],
         "sameAs": ["https://github.com/TirthaJas"] }
     ]
   }
@@ -72,6 +69,7 @@
     <a href="#about">About</a>
     <a href="#achievements">Achievements</a>
     <a href="#projects">Projects</a>
+    <a href="#robotics">Robotics</a>
     <a href="#skills">Skills</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -113,6 +111,8 @@
         <!-- ✏️ EDIT: your story -->
         <p>I am a student with a deep love for coding and a restless curiosity for new things.</p>
         <p>Currently in class 11, I am preparing for JEE Main and JEE Advanced, with the dream of studying at one of India’s top IITs.</p>
+        <!-- ✏️ EDIT: a new line about your robotics side -->
+        <p>Away from the screen, I build robots with Arduino and ESP32 boards, and my machines have won my school’s science exhibition three years in a row.</p>
         <div class="pull">
           <div class="seal" aria-hidden="true">
             <svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text><textPath href="#circ" textLength="508" lengthAdjust="spacing">TIRTHA JAS ◆ SOLUSVIR.CO ◆ STUDENT ◆ FOUNDER ◆ </textPath></text></svg>
@@ -124,6 +124,7 @@
       <dl class="facts reveal">
         <div><dt>Based in</dt><dd>India</dd></div>
         <div><dt>Focus</dt><dd>HTML, CSS, JavaScript, Java, Python, Git, Windows</dd></div>
+        <div><dt>Builds</dt><dd>Robots with Arduino &amp; ESP32</dd></div>
         <div><dt>Learning</dt><dd>Every shade of coding</dd></div>
         <div><dt>Languages</dt><dd>English, Bengali, Hindi</dd></div>
       </dl>
@@ -135,7 +136,7 @@
     <h2 class="reveal">Achievements</h2>
     <ol class="timeline">
       <li class="reveal"><time>2026</time><div><h3>School Topper, ICSE 2026</h3><p class="by">My School · CISCE</p><p>Finishing at the top of my school in the ICSE examinations remains the most delightful moment of my journey so far.</p></div></li>
-      <li class="reveal"><time>2023–25</time><div><h3>First Position, Science Exhibition, three years running</h3><p class="by">My School</p><p>Building things with my own hands has always been my favourite pastime, and mechanics has fascinated me from the start.</p></div></li>
+      <li class="reveal"><time>2023–25</time><div><h3>First Position, Science Exhibition, three years running</h3><p class="by">My School</p><p>Building things with my own hands has always been my favourite pastime, and mechanics has fascinated me from the start. My exhibition builds, from voice-controlled robots to an AI sign-language translator, are showcased below.</p><a class="more" href="#robotics">See the machines</a></div></li>
       <!-- ✏️ EDIT: replace this third one with a real achievement, or delete the whole <li> line -->
       <li class="reveal"><time>2024</time><div><h3>Achievement title</h3><p class="by">Issued by Organisation</p><p>One line on what you did and why it mattered.</p></div></li>
     </ol>
@@ -144,8 +145,66 @@
   <!-- ================= PROJECTS (cards come from script.js) ================= -->
   <section id="projects" class="section">
     <h2 class="reveal">Projects</h2>
-    <p class="sub reveal">A selection of things I have built. Open any card to see it live or explore the code.</p>
+    <p class="sub reveal">From machines that move to software that speaks, a selection of the things I have built.</p>
     <div class="grid" id="projectGrid"></div>
+
+    <!-- ================= FEATURED BUILD: ISL Sign Language Translator ================= -->
+    <div class="feature reveal" id="signs">
+      <span class="eyebrow">Featured build</span>
+      <h3>ISL Sign Language Translator</h3>
+      <p class="intro">Indian Sign Language is spoken with more than the hands. In ISL, facial expressions are not just emotional cues; they can change the actual meaning of a sentence. This translator reads <strong>both</strong> through an ordinary laptop webcam, then speaks the result aloud in natural English, in real time.</p>
+
+      <ol class="pipe">
+        <li class="reveal"><h4>See</h4><p>OpenCV captures live video from a standard laptop webcam.</p></li>
+        <li class="reveal"><h4>Read the hands</h4><p>MediaPipe tracks 21 landmark points on the hand and matches finger positions against a dictionary of 20 ISL words, such as I, YOU, HELLO, HELP and LOVE.</p></li>
+        <li class="reveal"><h4>Read the face</h4><p>Face Mesh follows 468 facial landmarks, measuring eyebrows, eyes and mouth to classify the emotion: happy, sad, angry, surprised, disgusted or neutral.</p></li>
+        <li class="reveal"><h4>Understand</h4><p>A local language model, run through Ollama, treats the signs as noisy input, ignores likely misdetections and repetitions, and grasps the intent behind them.</p></li>
+        <li class="reveal"><h4>Speak</h4><p>The model writes a natural first-person sentence with the right emotion, and gTTS speaks it aloud through the speakers.</p></li>
+      </ol>
+
+      <ul class="specs">
+        <li><b>21</b><span>hand landmarks tracked</span></li>
+        <li><b>468</b><span>facial landmarks tracked</span></li>
+        <li><b>20</b><span>ISL words recognised</span></li>
+        <li><b>6</b><span>emotions detected</span></li>
+      </ul>
+
+      <div class="choices">
+        <div class="reveal"><h4>Free, by design</h4><p>Paid cloud services were planned for translation and voice, but billing and account limits led me to replace them with free tools: Ollama for language and gTTS for speech. The finished application runs at zero ongoing cost.</p></div>
+        <div class="reveal"><h4>Modular by nature</h4><p>Hand tracking, face tracking, sign recognition, AI translation and voice output live in separate modules, so each part is easy to understand and improve on its own.</p></div>
+        <div class="reveal"><h4>Chosen with care</h4><p>It runs on Python 3.11 inside a dedicated virtual environment, because core libraries such as MediaPipe do not yet support newer versions of Python. The interface is a Streamlit app with a dark-blue glass design and live emotion indicators.</p></div>
+      </div>
+
+      <p class="chips"><b>Python 3.11</b><b>OpenCV</b><b>MediaPipe</b><b>Ollama</b><b>gTTS</b><b>Streamlit</b></p>
+      <p class="made">Built from scratch, at the very start of my programming journey, as an exhibition project.</p>
+      <!-- ✏️ EDIT: when ready, add your links here (copy this line, fill it in, delete the comment marks)
+      <a class="btn" href="https://github.com/TirthaJas/YOUR-REPO" target="_blank" rel="noopener">View source code</a>
+      -->
+    </div>
+  </section>
+
+  <!-- ================= ROBOTICS & ELECTRONICS ================= -->
+  <section id="robotics" class="section">
+    <h2 class="reveal">Robotics &amp; electronics</h2>
+    <p class="sub reveal">Software has never been enough for me. I like to give code a body: machines that move, sense and respond to the world around them.</p>
+
+    <div class="boards">
+      <article class="board reveal"><h3>Arduino Uno</h3><p>The heart of every robot I have built. Dependable and wonderfully forgiving to learn on, it commands my motors, sensors and drivers.</p></article>
+      <article class="board reveal"><h3>Arduino Nano</h3><p>The same spirit in a smaller body, ideal when a build needs to stay compact and tidy.</p></article>
+      <article class="board reveal"><h3>ESP32 &amp; ESP32-CAM</h3><p>Wi-Fi, Bluetooth and real processing power on one board. With the camera version, my machines gain eyes and a voice on the network, like the Mars rover’s live stream.</p></article>
+    </div>
+
+    <h3 class="sect-h reveal">Exhibition builds, in parts</h3>
+    <!-- ✏️ EDIT: add other parts you used, or the year of each build, if you like -->
+    <dl class="builds reveal">
+      <div><dt>Voice Control Robot Car</dt><dd>Arduino Uno · L293D motor driver · HC-05 Bluetooth module</dd></div>
+      <div><dt>Firefighting Robot</dt><dd>Arduino Uno · L298N motor driver · Automatic water-pump system</dd></div>
+      <div><dt>Mars Rover</dt><dd>ESP32-CAM · Arduino Uno · L293D motor driver · Live temperature and moisture sensors</dd></div>
+    </dl>
+
+    <!-- ✏️ EDIT: list your other Arduino / Nano / ESP32 projects here by name, so this paragraph says exactly what you have built -->
+    <p class="lab-note reveal">Beyond the exhibition, I have built many smaller projects on Arduino Uno, Nano and ESP32 boards. Along the way I have learned to wire circuits, read sensors, drive motors, connect devices wirelessly and, above all, to debug patiently when hardware and code disagree.</p>
+    <p class="chips reveal"><b>Circuit wiring</b><b>Motor control</b><b>Sensors</b><b>Bluetooth &amp; Wi-Fi</b><b>Live video streaming</b><b>Troubleshooting</b></p>
   </section>
 
   <!-- ================= SKILLS ================= -->
@@ -153,7 +212,7 @@
     <h2 class="reveal">Skills</h2>
     <!-- ✏️ EDIT: the scrolling strip. Add or remove <span> items freely -->
     <div class="marquee reveal" aria-label="Technologies I use">
-      <div class="track"><span>Python</span><span>JavaScript</span><span>Java</span><span>HTML</span><span>CSS</span><span>Git</span><span>GitHub</span><span>Windows</span></div>
+      <div class="track"><span>Python</span><span>JavaScript</span><span>Java</span><span>HTML</span><span>CSS</span><span>Arduino</span><span>ESP32</span><span>OpenCV</span><span>MediaPipe</span><span>Git</span><span>GitHub</span><span>Windows</span></div>
     </div>
     <div class="skills">
       <div class="skill-group reveal">
@@ -164,6 +223,14 @@
       <div class="skill-group reveal">
         <h3>Tools &amp; systems</h3>
         <p class="chips"><b>Git &amp; GitHub</b><b>Windows</b></p>
+      </div>
+      <div class="skill-group reveal">
+        <h3>AI &amp; computer vision</h3>
+        <p class="chips"><b>OpenCV</b><b>MediaPipe</b><b>Ollama</b><b>Streamlit</b></p>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Electronics &amp; robotics</h3>
+        <p class="chips"><b>Arduino Uno</b><b>Arduino Nano</b><b>ESP32</b><b>ESP32-CAM</b><b>L293D &amp; L298N</b><b>HC-05</b></p>
       </div>
       <div class="skill-group reveal">
         <h3>Strengths</h3>

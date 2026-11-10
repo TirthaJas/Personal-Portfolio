@@ -230,3 +230,60 @@ form .btn { justify-self: start; }
 .foot nav { display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem 1.6rem; margin-bottom: .8rem; }
 .foot nav a { color: var(--text); border-bottom: 1px solid transparent; transition: border-color .2s; }
 .foot nav a:hover { border-color: var(--gold); }
+
+/* =========================================================
+   Featured build, robotics section and small additions
+   ========================================================= */
+.more { display: inline-block; margin-top: .5rem; color: var(--gold); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.more::after { content: " →"; }
+.more:hover { border-color: var(--gold); }
+.sect-h { font-family: var(--serif); font-size: 1.9rem; margin-bottom: 1.2rem; }
+
+/* Featured build: ISL Sign Language Translator */
+.feature { position: relative; margin-top: 4.5rem; padding: clamp(1.4rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: linear-gradient(160deg, rgba(17,24,48,.88), rgba(10,14,26,.55)); }
+.feature::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--ice), var(--lime)); }
+.eyebrow { display: inline-block; margin-bottom: .8rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--lime); }
+.feature > h3 { font-family: var(--serif); font-size: clamp(2.1rem, 4.6vw, 3.1rem); line-height: 1.05; margin-bottom: 1rem; }
+.intro { max-width: 46rem; color: var(--muted); font-size: 1.08rem; }
+.intro strong { color: var(--text); font-weight: 500; }
+.pipe { list-style: none; padding: 0; margin: 2.6rem 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; position: relative; }
+.pipe::before { content: ""; position: absolute; left: 0; right: 0; top: 14px; height: 1px; background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 14px); opacity: .5; }
+.pipe::after { content: ""; position: absolute; top: 10px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); animation: travel 7s ease-in-out infinite; }
+@keyframes travel { 0% { left: 0; opacity: 0; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+.pipe li { position: relative; padding-top: 2.3rem; }
+.pipe li::before { content: ""; position: absolute; top: 9px; left: 0; width: 11px; height: 11px; border: 1px solid var(--gold); background: var(--bg); transform: rotate(45deg); }
+.pipe h4, .choices h4 { font-family: var(--serif); font-size: 1.45rem; color: var(--gold); margin-bottom: .35rem; }
+.pipe p, .choices p { color: var(--muted); font-size: .94rem; }
+.specs { list-style: none; padding: 1.5rem 0; margin: 0 0 2.4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; border-block: 1px solid var(--line); }
+.specs b { display: block; font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--gold); }
+.specs span { color: var(--muted); font-size: .88rem; }
+.choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.feature .chips { margin-bottom: 1.2rem; }
+.made { color: var(--muted); font-style: italic; font-family: var(--serif); font-size: 1.25rem; }
+
+/* Robotics & electronics */
+.boards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.4rem; margin-bottom: 3.4rem; }
+.board { position: relative; overflow: hidden; padding: 1.6rem; background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; transition: border-color .25s; }
+.board:hover { border-color: var(--gold); }
+.board::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--lime), transparent); transform: translateX(-100%); }
+.board:hover::after { transform: translateX(100%); transition: transform 1.1s ease; }
+.board h3 { font-family: var(--serif); font-size: 1.7rem; margin-bottom: .4rem; }
+.board p { color: var(--muted); font-size: .97rem; }
+.builds { margin-bottom: 2.6rem; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.builds div { display: grid; grid-template-columns: minmax(200px, 1fr) 2fr; gap: 1rem; padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--line); transition: background .25s; }
+.builds div:last-child { border-bottom: 0; }
+.builds div:hover { background: rgba(201,164,92,.05); }
+.builds dt { font-family: var(--serif); font-size: 1.45rem; }
+.builds dd { color: var(--muted); align-self: center; }
+.lab-note { max-width: 46rem; margin-bottom: 1.4rem; font-size: 1.05rem; }
+
+@media (max-width: 860px) {
+  .pipe { grid-template-columns: 1fr; gap: 1.6rem; }
+  .pipe::before, .pipe::after { display: none; }
+  .pipe li { padding: 0 0 0 1.8rem; border-left: 1px solid var(--line); }
+  .pipe li::before { top: .4rem; left: -6px; }
+  .builds div { grid-template-columns: 1fr; gap: .2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pipe::after { display: none; }
+}

@@ -8,6 +8,24 @@
    ========================================================= */
 const projects = [
   {
+    title: "ISL Sign Language Translator",
+    description: "A real-time AI system that reads Indian Sign Language and facial expression through a webcam, then speaks a natural English sentence aloud. Built entirely on free tools.",
+    tags: ["Python", "OpenCV", "MediaPipe", "Ollama", "Streamlit"],
+    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as images/isl.png
+    live: "",
+    code: "",                         // ✏️ EDIT: add your GitHub link, or leave empty to hide it
+    featured: true
+  },
+  {
+    title: "Mars Rover",
+    description: "A rover that streams live video and reports temperature and moisture as it moves, built around an ESP32-CAM and an Arduino Uno with an L293D motor driver.",
+    tags: ["ESP32-CAM", "Arduino Uno", "L293D", "Sensors"],
+    image: "images/mars-rover.jpg",   // ✏️ EDIT: save a photo of your rover as images/mars-rover.jpg
+    live: "",
+    code: "",                         // ✏️ EDIT: add your GitHub link if you have the code online
+    featured: true
+  },
+  {
     title: "JEE Tracker",
     description: "A daily companion for JEE aspirants: log your classes, plan your study hours and manage your time with clarity.",
     tags: ["HTML", "CSS", "JavaScript"],
@@ -25,15 +43,24 @@ const projects = [
     code: "https://github.com/yourname/project-two", // ✏️ EDIT: put your real GitHub link here
     featured: true
   },
-  // ✏️ EDIT: fill this in with your next project, or delete the whole { ... } block
   {
-    title: "Project Three",
-    description: "Say what you learned or what is special about this one.",
-    tags: ["Java"],
-    image: "",
+    title: "Firefighting Robot",
+    description: "A robot with an automatic water-pump system, driven by an Arduino Uno and an L298N motor driver, built to meet fire with a steady response.",
+    // ✏️ EDIT: if it finds the fire with flame sensors (or something else), say so in the description above
+    tags: ["Arduino Uno", "L298N", "Water pump"],
+    image: "images/firefighting-robot.jpg", // ✏️ EDIT: save a photo as images/firefighting-robot.jpg
+    live: "",
+    code: ""
+  },
+  {
+    title: "Voice Control Robot Car",
+    description: "A car that obeys your voice: spoken commands travel over Bluetooth (HC-05) to an Arduino Uno, which steers the wheels through an L293D motor driver.",
+    tags: ["Arduino Uno", "L293D", "HC-05"],
+    image: "images/voice-car.jpg",     // ✏️ EDIT: save a photo as images/voice-car.jpg
     live: "",
     code: ""
   }
+  // ✏️ EDIT: to add another project, copy one { ... } block above, paste it here (after a comma) and change the text
 ];
 
 /* =========================================================
