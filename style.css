@@ -327,9 +327,6 @@ form .btn { justify-self: start; }
 .js .feature.in .pipe li::before { animation: lightup .6s ease forwards; animation-delay: calc(var(--i, 0) * 420ms + 1.2s); }
 @keyframes lightup { to { background: var(--lime); border-color: var(--lime); box-shadow: 0 0 14px var(--lime); } }
 
-/* Big outlined words that slide behind each section as you scroll */
-.section[data-ghost]::before { content: attr(data-ghost); position: absolute; top: 1rem; left: 0; z-index: -1; pointer-events: none; white-space: nowrap; font-family: var(--serif); font-weight: 700; font-size: clamp(5rem, 17vw, 13rem); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(201,164,92,.15); translate: calc((var(--p, .5) - .5) * -16vw) 0; }
-
 /* Achievements line fills as you read down */
 .timeline { position: relative; }
 .timeline::after { content: ""; position: absolute; left: -1px; top: 0; width: 2px; height: calc(var(--tp, 0) * 100%); background: linear-gradient(var(--gold), var(--lime)); box-shadow: 0 0 12px rgba(182,242,60,.5); }
@@ -353,11 +350,6 @@ form .btn { justify-self: start; }
 .aurora i:nth-child(2) { translate: 0 calc(var(--sy, 0) * -.09px); }
 .aurora i:nth-child(3) { translate: 0 calc(var(--sy, 0) * .04px); }
 
-/* Floating marks */
-.deco { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.deco svg { position: absolute; width: 44px; fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .32; }
-.deco .gold { color: var(--gold); } .deco .ice { color: var(--ice); } .deco .lime { color: var(--lime); }
-
 /* Back-to-top button */
 .totop { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 55; width: 48px; height: 48px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(10,14,26,.88); color: var(--text); cursor: pointer; opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s, transform .3s, box-shadow .3s; }
 .totop.show { opacity: 1; transform: none; pointer-events: auto; }
@@ -371,12 +363,10 @@ form .btn { justify-self: start; }
   .feature-top { grid-template-columns: 1fr; gap: 1.6rem; }
   .flag { position: static; align-self: flex-start; margin-bottom: 1rem; width: fit-content; }
   .feature { display: flex; flex-direction: column; }
-  .deco svg { opacity: .2; }
-  .section[data-ghost]::before { top: 2rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .js #hand line { stroke-dasharray: none; stroke-dashoffset: 0; }
   .js #hand circle { opacity: 1; }
   .js .circuit .trace { stroke-dashoffset: 0; }
-  .feature.in::after, .flag::after, .deco { display: none; }
+  .feature.in::after, .flag::after { display: none; }
 }

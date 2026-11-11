@@ -12,7 +12,7 @@ const projects = [
     title: "ISL Sign Language Translator",
     description: "A real-time AI system that reads Indian Sign Language and facial expression through a webcam, then speaks a natural English sentence aloud. Built entirely on free tools.",
     tags: ["Python", "OpenCV", "MediaPipe", "Ollama", "Streamlit"],
-    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as images/isl.png
+    image: "images/isl.jpg",          // ✏️ EDIT: save a screenshot of the app as images/isl.jpg
     live: "",
     code: "",                         // ✏️ EDIT: add your GitHub link, or leave empty to hide it
     flagship: true,                   // ✏️ EDIT: the gold "Flagship" tag, remove this line to switch it off
@@ -197,7 +197,6 @@ const sections = [...document.querySelectorAll(".section")];
 const timeline = document.querySelector(".timeline");
 const timelineItems = timeline ? [...timeline.children] : [];
 const circuit = document.querySelector(".circuit");
-const decos = [...document.querySelectorAll(".deco > svg")];
 const toTop = document.querySelector(".totop");
 const toTopRing = toTop && toTop.querySelector(".fg");
 if (toTop) toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }));
@@ -212,7 +211,7 @@ function motion(max) {
   if (reduce) return;
   root.style.setProperty("--sy", y.toFixed(0));                       // used by rings and drifting light
   root.style.setProperty("--hp", clamp(y / (vh * 0.9)).toFixed(3));   // hero exit progress
-  // each section reports how far you have scrolled through it (drives the ghost words)
+  // each section reports how far you have scrolled through it (drives the circuit traces)
   sections.forEach(s => {
     const r = s.getBoundingClientRect();
     if (r.bottom < -200 || r.top > vh + 200) return;
@@ -229,11 +228,6 @@ function motion(max) {
     timeline.style.setProperty("--tp", clamp((vh * 0.6 - r.top) / r.height).toFixed(3));
     timelineItems.forEach(li => li.classList.toggle("lit", li.getBoundingClientRect().top < vh * 0.6));
   }
-  // floating marks sway and turn with the scroll
-  decos.forEach(d => {
-    d.style.translate = `0 ${(Math.sin(y / 450 * +d.dataset.s) * 46).toFixed(1)}px`;
-    d.style.rotate = (y * +d.dataset.r).toFixed(1) + "deg";
-  });
 }
 
 // Hand-tracking illustration (21 landmarks, like MediaPipe) drawn as an SVG

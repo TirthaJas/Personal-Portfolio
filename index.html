@@ -49,6 +49,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- The extra animations. Keep this line right after style.css -->
+  <link rel="stylesheet" href="animations.css">
   <!-- Lets the CSS know JavaScript is running (so animations never hide content by mistake). Keep this line. -->
   <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -58,15 +60,6 @@
 <div class="progress" aria-hidden="true"></div>
 <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="spot" aria-hidden="true"></div>
-<!-- Decorative marks that sway and turn as you scroll. Purely visual: you can delete this whole block safely. -->
-<div class="deco" aria-hidden="true">
-  <svg class="gold" style="left:5%;top:20%" data-s="1.0" data-r=".04" viewBox="0 0 44 44"><circle cx="22" cy="22" r="9"/><path d="M22 2v10M22 32v10M2 22h10M32 22h10"/></svg>
-  <svg class="ice" style="right:7%;top:28%;width:60px" data-s="-1.2" data-r="-.03" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" stroke-dasharray="3 6"/></svg>
-  <svg class="lime" style="left:11%;top:66%;width:34px" data-s="1.4" data-r=".06" viewBox="0 0 40 40"><path d="M20 3 37 20 20 37 3 20Z"/></svg>
-  <svg class="gold" style="right:5%;top:70%;width:26px" data-s="-0.8" data-r=".05" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
-  <svg class="ice" style="left:3%;top:44%;width:46px" data-s="0.9" data-r="-.05" viewBox="0 0 48 48"><path d="M24 3 42 13.5v21L24 45 6 34.5v-21Z"/></svg>
-  <svg class="gold" style="right:12%;top:10%;width:60px" data-s="1.1" data-r=".02" viewBox="0 0 60 30"><g fill="currentColor" stroke="none"><circle cx="6" cy="6" r="2"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="6" r="2"/><circle cx="14" cy="20" r="2"/><circle cx="30" cy="20" r="2"/><circle cx="46" cy="20" r="2"/></g></svg>
-</div>
 
 <header class="nav">
   <a class="brand" href="#top" aria-label="SOLUSVIR.CO, back to top">
@@ -113,7 +106,7 @@
   </section>
 
   <!-- ================= ABOUT ================= -->
-  <section id="about" class="section" data-ghost="About">
+  <section id="about" class="section">
     <h2 class="reveal">About me</h2>
     <div class="about">
       <div class="prose reveal">
@@ -141,7 +134,7 @@
   </section>
 
   <!-- ================= ACHIEVEMENTS ================= -->
-  <section id="achievements" class="section" data-ghost="Awards">
+  <section id="achievements" class="section">
     <h2 class="reveal">Achievements</h2>
     <ol class="timeline">
       <li class="reveal"><time>2026</time><div><h3>School Topper, ICSE 2026</h3><p class="by">My School · CISCE</p><p>Finishing at the top of my school in the ICSE examinations remains the most delightful moment of my journey so far.</p></div></li>
@@ -152,7 +145,7 @@
   </section>
 
   <!-- ================= PROJECTS (cards come from script.js) ================= -->
-  <section id="projects" class="section" data-ghost="Projects">
+  <section id="projects" class="section">
     <h2 class="reveal">Projects</h2>
     <p class="sub reveal">From machines that move to software that speaks, a selection of the things I have built.</p>
     <div class="grid" id="projectGrid"></div>
@@ -205,7 +198,7 @@
   </section>
 
   <!-- ================= ROBOTICS & ELECTRONICS ================= -->
-  <section id="robotics" class="section" data-ghost="Robotics">
+  <section id="robotics" class="section">
     <!-- Circuit traces that draw themselves as you scroll. Purely visual: safe to delete -->
     <svg class="circuit" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <g class="traces">
@@ -239,7 +232,7 @@
   </section>
 
   <!-- ================= SKILLS ================= -->
-  <section id="skills" class="section" data-ghost="Skills">
+  <section id="skills" class="section">
     <h2 class="reveal">Skills</h2>
     <!-- ✏️ EDIT: the scrolling strip. Add or remove <span> items freely -->
     <div class="marquee reveal" aria-label="Technologies I use">
@@ -271,7 +264,7 @@
   </section>
 
   <!-- ================= CONTACT ================= -->
-  <section id="contact" class="section" data-ghost="Contact">
+  <section id="contact" class="section">
     <h2 class="reveal">Contact &amp; socials</h2>
     <p class="sub reveal">Have an idea, a question or simply want to say hello? Write to me. I read every message.</p>
     <div class="contact">
@@ -305,5 +298,7 @@
 <button class="totop" aria-label="Back to top"><svg viewBox="0 0 44 44" aria-hidden="true"><circle class="bg" cx="22" cy="22" r="19"/><circle class="fg" cx="22" cy="22" r="19" pathLength="1"/></svg><span aria-hidden="true">↑</span></button>
 
 <script src="script.js"></script>
+<!-- The extra animations. Keep this line right after script.js -->
+<script src="animations.js"></script>
 </body>
 </html>
