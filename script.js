@@ -5,15 +5,17 @@
           (leave it as "" to show a plain placeholder)
    live / code: links; leave as "" to hide that link
    featured: true shows a small "Featured" badge (optional)
+   flagship: true shows a gold shimmering "Flagship" tag instead (use it for your best project)
    ========================================================= */
 const projects = [
   {
     title: "ISL Sign Language Translator",
     description: "A real-time AI system that reads Indian Sign Language and facial expression through a webcam, then speaks a natural English sentence aloud. Built entirely on free tools.",
     tags: ["Python", "OpenCV", "MediaPipe", "Ollama", "Streamlit"],
-    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as - images/isl.png
+    image: "images/isl.png",          // ✏️ EDIT: save a screenshot of the app as images/isl.png
     live: "",
     code: "",                         // ✏️ EDIT: add your GitHub link, or leave empty to hide it
+    flagship: true,                   // ✏️ EDIT: the gold "Flagship" tag, remove this line to switch it off
     featured: true
   },
   {
@@ -86,7 +88,7 @@ projects.forEach(p => {
     p.code ? `<a href="${p.code}" target="_blank" rel="noopener">Source code</a>` : ""
   ].join("");
   card.innerHTML = `
-    ${p.featured ? '<span class="badge">Featured</span>' : ""}
+    ${p.flagship ? '<span class="badge flag-badge">Flagship</span>' : p.featured ? '<span class="badge">Featured</span>' : ""}
     <div class="shot">${shot}</div>
     <div class="body">
       <h3>${p.title}</h3>
@@ -188,6 +190,91 @@ const spy = new IntersectionObserver(entries => {
 }, { rootMargin: "-45% 0px -50% 0px" });
 document.querySelectorAll("main section[id]").forEach(s => spy.observe(s));
 
+// ---------- Extra scroll motion (you can leave this alone) ----------
+const root = document.documentElement;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const sections = [...document.querySelectorAll(".section")];
+const timeline = document.querySelector(".timeline");
+const timelineItems = timeline ? [...timeline.children] : [];
+const circuit = document.querySelector(".circuit");
+const decos = [...document.querySelectorAll(".deco > svg")];
+const toTop = document.querySelector(".totop");
+const toTopRing = toTop && toTop.querySelector(".fg");
+if (toTop) toTop.addEventListener("click", () => scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }));
+
+function motion(max) {
+  const y = scrollY, vh = innerHeight;
+  // back-to-top button with a progress ring
+  if (toTop) {
+    toTop.classList.toggle("show", y > 500);
+    toTopRing.style.strokeDashoffset = (1 - (max > 0 ? y / max : 0)).toFixed(3);
+  }
+  if (reduce) return;
+  root.style.setProperty("--sy", y.toFixed(0));                       // used by rings and drifting light
+  root.style.setProperty("--hp", clamp(y / (vh * 0.9)).toFixed(3));   // hero exit progress
+  // each section reports how far you have scrolled through it (drives the ghost words)
+  sections.forEach(s => {
+    const r = s.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > vh + 200) return;
+    const p = clamp((vh - r.top) / (vh + r.height));
+    s.style.setProperty("--p", p.toFixed(3));
+    if (s === circuit?.parentElement) {
+      circuit.style.setProperty("--d", (1 - clamp((p - 0.12) * 1.7)).toFixed(3));
+      circuit.classList.toggle("lit", p > 0.45);
+    }
+  });
+  // achievements: the gold line fills as you read down
+  if (timeline) {
+    const r = timeline.getBoundingClientRect();
+    timeline.style.setProperty("--tp", clamp((vh * 0.6 - r.top) / r.height).toFixed(3));
+    timelineItems.forEach(li => li.classList.toggle("lit", li.getBoundingClientRect().top < vh * 0.6));
+  }
+  // floating marks sway and turn with the scroll
+  decos.forEach(d => {
+    d.style.translate = `0 ${(Math.sin(y / 450 * +d.dataset.s) * 46).toFixed(1)}px`;
+    d.style.rotate = (y * +d.dataset.r).toFixed(1) + "deg";
+  });
+}
+
+// Hand-tracking illustration (21 landmarks, like MediaPipe) drawn as an SVG
+const handSvg = document.getElementById("hand");
+if (handSvg) {
+  const P = [[100,215],[68,190],[46,160],[32,132],[22,108],[74,128],[68,92],[64,66],[61,42],[100,120],[100,80],[100,50],[100,24],[124,126],[130,92],[133,68],[136,46],[146,140],[158,112],[166,92],[172,74]];
+  const E = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+  let svg = "";
+  E.forEach(([a, b], i) => {
+    const [x1, y1] = P[a], [x2, y2] = P[b];
+    svg += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="--len:${Math.hypot(x2 - x1, y2 - y1).toFixed(1)};--i:${i}"/>`;
+  });
+  P.forEach(([x, y], i) => {
+    svg += `<circle cx="${x}" cy="${y}" r="${[4, 8, 12, 16, 20].includes(i) ? 4.4 : 3.2}" style="--i:${i}"/>`;
+  });
+  handSvg.innerHTML = svg;
+}
+// The example reading under the hand cycles through a few of your 20 signs
+const signEl = document.getElementById("sign"), moodEl = document.getElementById("mood");
+if (signEl && !reduce) {
+  const demo = [["HELLO", "happy"], ["I", "neutral"], ["LOVE", "happy"], ["YOU", "surprised"], ["HELP", "sad"]];
+  let k = 0;
+  setInterval(() => { k = (k + 1) % demo.length; signEl.textContent = demo[k][0]; moodEl.textContent = demo[k][1]; }, 2200);
+}
+
+// Numbers in the featured build count up when they scroll into view
+const counters = document.querySelectorAll(".specs b");
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    counterObserver.unobserve(e.target);
+    const el = e.target, end = +el.dataset.to, t0 = performance.now();
+    (function step(t) {
+      const k = clamp((t - t0) / 1400);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+      if (k < 1) requestAnimationFrame(step);
+    })(t0);
+  });
+}, { threshold: 0.6 });
+counters.forEach(c => { c.dataset.to = c.textContent; if (!reduce) { c.textContent = "0"; counterObserver.observe(c); } });
+
 // Scroll progress line + cursor spotlight
 const bar = document.querySelector(".progress");
 let ticking = false;
@@ -197,10 +284,12 @@ function onScroll() {
   requestAnimationFrame(() => {
     const max = document.documentElement.scrollHeight - innerHeight;
     bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    motion(max);
     ticking = false;
   });
 }
 addEventListener("scroll", onScroll, { passive: true });
+addEventListener("resize", onScroll);
 onScroll();
 
 if (fine && !reduce) {
