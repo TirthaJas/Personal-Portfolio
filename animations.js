@@ -8,9 +8,53 @@
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (reduce) return;
 
+  /* ✏️ EDIT: true = the opening intro plays every time. Change to false to switch it off. */
+  var SHOW_INTRO = true;
+
+  var root = document.documentElement;
   var mouse = { x: -999, y: -999 };
 
-  /* ---------- 1) Constellation ---------- */
+  /* ---------- 1) Opening intro ---------- */
+  if (SHOW_INTRO) {
+    var intro = document.createElement("div");
+    intro.className = "splash";
+    intro.setAttribute("aria-hidden", "true");
+    intro.innerHTML = '<div class="splash-in"><div class="splash-logo"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" pathLength="1"/></svg><span class="logo-mark"></span></div><span class="wordmark"></span></div>';
+    document.body.appendChild(intro);
+    root.classList.add("splash-on");
+    setTimeout(function () { intro.classList.add("out"); root.classList.remove("splash-on"); }, 2100);
+    setTimeout(function () { intro.remove(); }, 3000);
+  }
+
+  /* ---------- 2) Name glint, skill-box order ---------- */
+  setTimeout(function () { var h = document.getElementById("name"); if (h) h.classList.add("glint"); }, SHOW_INTRO ? 4300 : 2400);
+  document.querySelectorAll(".skill-group .chips").forEach(function (c) {
+    c.querySelectorAll("b").forEach(function (b, i) { b.style.setProperty("--k", i); });
+  });
+
+  /* ---------- 3) Menu: sliding gold line ---------- */
+  var nav = document.querySelector(".links");
+  if (nav) {
+    var ind = document.createElement("i");
+    ind.className = "ind";
+    nav.appendChild(ind);
+    var hovering = false;
+    var place = function (a) {
+      if (!a) { ind.style.opacity = 0; return; }
+      ind.style.left = a.offsetLeft + "px";
+      ind.style.width = a.offsetWidth + "px";
+      ind.style.top = (a.offsetTop + a.offsetHeight - 1) + "px";
+      ind.style.opacity = 1;
+    };
+    var current = function () { return nav.querySelector("a.active"); };
+    nav.addEventListener("mouseover", function (e) { if (e.target.tagName === "A") { hovering = true; place(e.target); } });
+    nav.addEventListener("mouseleave", function () { hovering = false; place(current()); });
+    new MutationObserver(function () { if (!hovering) place(current()); })
+      .observe(nav, { subtree: true, attributes: true, attributeFilter: ["class"] });
+    addEventListener("resize", function () { place(current()); });
+  }
+
+  /* ---------- 4) Constellation ---------- */
   var cv = document.createElement("canvas");
   cv.className = "stars";
   cv.setAttribute("aria-hidden", "true");
@@ -73,7 +117,7 @@
   addEventListener("pointermove", function (e) { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
   document.addEventListener("pointerleave", function () { mouse.x = mouse.y = -999; });
 
-  /* ---------- 2) Hero emblem leans toward the cursor ---------- */
+  /* ---------- 5) Hero emblem leans toward the cursor ---------- */
   var hero = document.querySelector(".hero"), emblem = document.querySelector(".emblem");
   if (hero && emblem) {
     hero.addEventListener("pointermove", function (e) {
@@ -85,20 +129,4 @@
       emblem.style.setProperty("--ex", 0); emblem.style.setProperty("--ey", 0);
     });
   }
-
-  /* ---------- 3) Gold cursor ring ---------- */
-  var ring = document.createElement("div");
-  ring.className = "cring"; ring.setAttribute("aria-hidden", "true");
-  document.body.appendChild(ring);
-  var rx = 0, ry = 0;
-  (function follow() {
-    rx += (mouse.x - rx) * .18; ry += (mouse.y - ry) * .18;
-    ring.style.transform = "translate(" + rx.toFixed(1) + "px," + ry.toFixed(1) + "px)";
-    requestAnimationFrame(follow);
-  })();
-  addEventListener("pointermove", function () { ring.classList.add("on"); }, { once: true });
-  document.addEventListener("pointerleave", function () { ring.classList.remove("on"); });
-  document.addEventListener("pointerover", function (e) {
-    ring.classList.toggle("big", !!(e.target.closest && e.target.closest("a, button, .card, input, textarea")));
-  });
 })();
