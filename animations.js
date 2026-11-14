@@ -14,6 +14,16 @@
   var root = document.documentElement;
   var mouse = { x: -999, y: -999 };
 
+  /* The dots take their colours from the chosen palette (see themes.js) */
+  var GOLD = "201,164,92", ICE = "127,214,255";
+  function readColours() {
+    var cs = getComputedStyle(root);
+    GOLD = cs.getPropertyValue("--gold-rgb").trim() || "201,164,92";
+    ICE = cs.getPropertyValue("--ice-rgb").trim() || "127,214,255";
+  }
+  readColours();
+  addEventListener("themechange", readColours);
+
   /* ---------- 1) Opening intro ---------- */
   if (SHOW_INTRO) {
     var intro = document.createElement("div");
@@ -90,16 +100,16 @@
       for (j = i + 1; j < pts.length; j++) {
         b = pts[j]; dx = a.x - b.x; dy = a.y - b.y; d = Math.sqrt(dx * dx + dy * dy);
         if (d < link) {
-          ctx.strokeStyle = "rgba(201,164,92," + ((1 - d / link) * .16).toFixed(3) + ")";
+          ctx.strokeStyle = "rgba(" + GOLD + "," + ((1 - d / link) * .16).toFixed(3) + ")";
           ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
       dx = a.x - mouse.x; dy = a.y - mouse.y; d = Math.sqrt(dx * dx + dy * dy);
       if (d < 150) {
-        ctx.strokeStyle = "rgba(127,214,255," + ((1 - d / 150) * .35).toFixed(3) + ")";
+        ctx.strokeStyle = "rgba(" + ICE + "," + ((1 - d / 150) * .35).toFixed(3) + ")";
         ctx.lineWidth = .7; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
       }
-      ctx.fillStyle = a.gold ? "rgba(201,164,92,.55)" : "rgba(127,214,255,.5)";
+      ctx.fillStyle = a.gold ? "rgba(" + GOLD + ",.55)" : "rgba(" + ICE + ",.5)";
       ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.2832); ctx.fill();
     }
     requestAnimationFrame(frame);
